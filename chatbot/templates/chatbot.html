@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Chatbot</title>
+</head>
+<body style="margin: 0; padding: 0; height: 100%; background: url('{% static 'images/background3.jpg' %}') no-repeat center center fixed; background-size: cover;">
+    
+    <h1 style="font-size: 4vw; color: grey; text-transform: uppercase; text-shadow:0 0 5px white, 0 0 10px white">
+    🤖 AI Chatbot 🤖</h1>
+    
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="query" placeholder="⌨ Type your question ⌨" style="font-size: 1.5em; padding: 0.5em; margin: 0.5em; border: none; border-radius: 5px; box-shadow: 0 0 5px white;">
+        <button type="submit" name="action" value="ask" style="font-size: 1.2em; padding: 0.5em 1em; margin: 0.5em; border: none; border-radius: 5px; box-shadow: 0 0 5px white; background-color: transparent; color: grey; text-shadow:0 0 5px grey">Ask</button>
+        <button type="submit" name="action" value="speak" style="font-size: 1.2em; padding: 0.5em 1em; margin: 0.5em; border: none; border-radius: 5px; box-shadow: 0 0 5px white; background-color: transparent; color: grey; text-shadow: 0 0 5px grey">🎤Speak</button>
+    </form>
+    
+    <hr style="border-color: white;">
+
+    <h2 style="color: white; text-transform: uppercase; text-shadow: 0 0 5px grey, 0 0 10px grey; ">Conversation:</h2>
+    <div>
+        {% for speaker, text in conversation %}
+            <p style=" color: white">
+                <strong style="font-size: 1.2em; border-radius: 5px; box-shadow: 0 0 5px white; background-color: transparent; color: grey; text-shadow: 0 0 5px white;">{{ speaker }}:</strong>
+                <pre style="color: grey; font-size: 1.1em; white-space: pre-wrap;">{{ text }}</pre>
+
+            </p>
+            
+        {% endfor %}
+    </div>
+</body>
+</html>
